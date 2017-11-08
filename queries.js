@@ -11,7 +11,7 @@ var db = pgp(connectionString);
 
 //  add query functions
 function getAllPuppies(req, res, next) {
-  db.any('select * from pups')
+  db.any('select p.ID, p.name, b.breed_name, p.age, p.sex from pups as p join breeds as b on p.breed_ID = b.breed_ID')
     .then(function (data) {
       res.status(200)
         .json({
