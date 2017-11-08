@@ -27,7 +27,7 @@ function getAllPuppies(req, res, next) {
 
 function getSinglePuppy(req, res, next) {
   var pupID = parseInt(req.params.id);
-  db.one('select * from pups where id = $1', pupID)
+  db.one('select p.ID, p.name, b.breed_name, p.age, p.sex from pups as p join breeds as b on p.breed_ID = b.breed_ID where id = $1', pupID)
     .then(function (data) {
       res.status(200)
         .json({
